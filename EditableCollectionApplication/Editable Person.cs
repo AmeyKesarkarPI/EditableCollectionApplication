@@ -17,7 +17,7 @@ namespace EditableCollectionApplication
         }
 
         protected override string DisplayList(object item)
-        {
+       {
             Person person = (Person)item;
             if (SelectedFilterText == person.PersonName)
             {
@@ -25,7 +25,6 @@ namespace EditableCollectionApplication
             }
 
             OnPropertyChange(nameof(SelectedItem));
-            OnPropertyChange(nameof(SelectedItemList));
             return person.PersonName;
         }
 

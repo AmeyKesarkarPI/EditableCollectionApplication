@@ -49,7 +49,7 @@ namespace EditableCollectionApplication
 
         private string filterText;
 
-        public ObservableCollection<string> EditableCollectionList { get; set; }
+        public ObservableCollection<string> EditableCollectionList {get; set; }
 
         private ObservableCollection<object> editableCollectionList { get; set; }
 

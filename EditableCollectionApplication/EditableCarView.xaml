@@ -12,19 +12,19 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <Label Content="PersonID" Width="100"></Label>
+                            <Label Content="Car ID" Width="100"></Label>
                             <TextBox Text="{Binding CarID}" Width="100"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <Label Content="PersonAge" Width="100"></Label>
+                            <Label Content="Car Name" Width="100"></Label>
                             <TextBox Text="{Binding CarName}" Width="100"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <Label Content="PersonName" Width="100"></Label>
+                            <Label Content="Model Name" Width="100"></Label>
                             <TextBox Text="{Binding ModelName}" Width="100"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <Label Content="PersonName" Width="100"></Label>
+                            <Label Content="Color " Width="100"></Label>
                             <TextBox Text="{Binding Color}" Width="100"></TextBox>
                         </StackPanel>
                     </StackPanel>
