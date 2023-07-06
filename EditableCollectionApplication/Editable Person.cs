@@ -10,22 +10,28 @@ namespace EditableCollectionApplication
 {
     public class EditablePerson : EditableCollectionViewModel
     {
-        public ObservableCollection<object> Persons1 { get; set; }
         public EditablePerson(ObservableCollection<object> Persons) : base(Persons)
         {
-            Persons1 = Persons;
         }
 
         protected override string DisplayList(object item)
-       {
+        {
             Person person = (Person)item;
-            if (SelectedFilterText == person.PersonName)
-            {
-                SelectedItem = new EditablePerson(new ObservableCollection<object>() { person});
-            }
-
-            OnPropertyChange(nameof(SelectedItem));
             return person.PersonName;
+        }
+
+        protected override bool ValidateSelectedItem(object item)
+        {
+            Person person = (Person)item;
+            return SelectedFilterText == person.PersonName;
+        }
+
+        protected override void AddSelectedItem(object item, EditableCollectionViewModel viewModel)
+        {
+            SelectedItemList = new ObservableCollection<object>();
+            Person person = (Person)item;
+            person.viewModel = viewModel; 
+            SelectedItemList.Add(person);
         }
 
         protected override bool ValidateSearch(object item)

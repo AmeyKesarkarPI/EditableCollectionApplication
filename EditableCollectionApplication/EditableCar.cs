@@ -9,21 +9,29 @@ namespace EditableCollectionApplication
 {
     public class EditableCar : EditableCollectionViewModel
     {
-        public ObservableCollection<object> Cars1 { get; set; }
         public EditableCar(ObservableCollection<object> Cars) : base (Cars)
         {
-            Cars1 = Cars;
         }
 
         protected override string DisplayList(object item)
         {
             Car car = (Car)item;
-            if (SelectedFilterText == car.CarName)
-            {
-                SelectedItem = new EditableCar(new ObservableCollection<object>() { car});
-            }
-            OnPropertyChange(nameof(SelectedItem));
             return car.CarName;
+        }
+
+
+        protected override bool ValidateSelectedItem(object item)
+        {
+            Car car = (Car)item;
+            return SelectedFilterText == car.CarName ;
+        }
+
+        protected override void AddSelectedItem(object item, EditableCollectionViewModel viewModel)
+        {
+            SelectedItemList = new ObservableCollection<object>();
+            Car car = (Car)item;
+            car.viewModel = viewModel;
+            SelectedItemList.Add(car);
         }
 
         protected override bool ValidateSearch(object item)

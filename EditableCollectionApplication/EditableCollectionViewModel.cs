@@ -11,8 +11,6 @@ namespace EditableCollectionApplication
     public class EditableCollectionViewModel : BaseWindowViewModel
     {
 
-        public EditableCollectionViewModel SelectedItem { get; set; }
-
         private string selectedFilterText { get; set; }
 
         public string SelectedFilterText
@@ -23,7 +21,7 @@ namespace EditableCollectionApplication
             }
             set
             {
-                if (filterText != value)
+                if (filterText != value && value != null)
                 {
                     selectedFilterText = value;
                     FilterText = selectedFilterText;
@@ -49,15 +47,23 @@ namespace EditableCollectionApplication
 
         private string filterText;
 
-        public ObservableCollection<string> EditableCollectionList {get; set; }
+        public ObservableCollection<string> EditableCollectionList { get; set; }
 
         private ObservableCollection<object> editableCollectionList { get; set; }
 
-        public ObservableCollection<object> SelectedItemList { get; set; }
-        
-        private ObservableCollection<string> selectedItemList { get; set; }
+        public ObservableCollection<object> SelectedItemList
+        {
+            get
+            {
+                return selectedItemList;
+            }
+            set
+            {
+                selectedItemList = value;
+            }
+        }
 
-
+        private ObservableCollection<object> selectedItemList { get; set; }
         public void FilterList()
         {
             EditableCollectionList = new ObservableCollection<string>();
@@ -66,12 +72,26 @@ namespace EditableCollectionApplication
                 if (ValidateSearch(item))
                 {
                     EditableCollectionList.Add(DisplayList(item));
+                    if (ValidateSelectedItem(item))
+                    {
+                        AddSelectedItem(item, this);
+                    }
                 }
             }
 
+            OnPropertyChange(nameof(SelectedItemList));
             OnPropertyChange(nameof(EditableCollectionList));
         }
 
+        protected virtual void AddSelectedItem(object item, EditableCollectionViewModel viewModel)
+        {
+            SelectedItemList.Add(item);
+        }
+
+        protected virtual bool ValidateSelectedItem(object item)
+        {
+            return SelectedFilterText == item.ToString();
+        }
 
         protected virtual string DisplayList(object item)
         {

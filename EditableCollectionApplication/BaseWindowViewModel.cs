@@ -13,7 +13,10 @@ namespace EditableCollectionApplication
 
         public void OnPropertyChange(string PropertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+            }
         }
     }
 }

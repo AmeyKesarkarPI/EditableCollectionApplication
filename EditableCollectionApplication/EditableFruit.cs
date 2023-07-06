@@ -9,21 +9,28 @@ namespace EditableCollectionApplication
 {
     public class EditableFruit : EditableCollectionViewModel
     {
-        public ObservableCollection<object> Fruit1 { get; set; }
         public EditableFruit(ObservableCollection<object> Fruits) : base (Fruits)
         {
-            Fruit1 = Fruits;
         }
 
         protected override string DisplayList(object item)
         {
             Fruit fruit = (Fruit)item;
-            if (SelectedFilterText == fruit.FruitName)
-            {
-                SelectedItem = new EditableFruit(new ObservableCollection<object>() { fruit });
-            }
-            OnPropertyChange(nameof(SelectedItem));
             return fruit.FruitName;
+        }
+
+        protected override bool ValidateSelectedItem(object item)
+        {
+            Fruit fruit = (Fruit)item;
+            return SelectedFilterText == fruit.FruitName;
+        }
+
+        protected override void AddSelectedItem(object item, EditableCollectionViewModel viewModel)
+        {
+            SelectedItemList = new ObservableCollection<object>();
+            Fruit fruit = (Fruit)item;
+            fruit.viewModel = viewModel;
+            SelectedItemList.Add(fruit);
         }
 
         protected override bool ValidateSearch(object item)

@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type local:EditableCar}">
+        <DataTemplate DataType="{x:Type local:Car}">
             <local:EditableCarView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:EditablePerson}">
+        <DataTemplate DataType="{x:Type local:Person}">
             <local:EditablePersonView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:EditableFruit}">
+        <DataTemplate DataType="{x:Type local:Fruit}">
             <local:EditableFruitView/>
         </DataTemplate>
     </UserControl.Resources>
@@ -34,8 +34,7 @@
                 </ListView>
             </StackPanel>
         </StackPanel>
-        <ContentPresenter Height="200" Width="200" Content="{Binding SelectedItem}">
-
-        </ContentPresenter>
+        <ItemsControl ItemsSource="{Binding SelectedItemList}">
+        </ItemsControl>
     </StackPanel>
 </UserControl>
